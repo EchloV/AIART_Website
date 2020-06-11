@@ -1,0 +1,53 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: LOVAN
+  Date: 2020/5/14
+  Time: 0:00
+  To change this template use File | Settings | File Templates.
+-->
+<html lang="zh">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
+    <title>开始</title>
+</head>
+<body>
+<div>
+    <h2 style="font-family: Arial;">Hello World</h2>
+</div>
+<form id="testForm" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <a href="javascript:savePic();" class="btn green"> 提交 </a>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    function savePic(){
+        var eles = document.getElementById('testForm')
+        var fData = new FormData(eles)
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/testUp",
+            data: fData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert(JSON.stringify(data));
+            },
+            error: function(data) {
+                alert("error:"+data.responseText);
+            }
+        })
+    }
+    $(function () {
+        $("#upload").click(function () {
+            var eles = document.getElementById('testForm')
+            var fData = new FormData(eles)
+            alert(fData)
+            //$.ajax()
+        })
+    })
+</script>
